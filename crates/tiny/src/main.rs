@@ -63,6 +63,7 @@ fn main() {
                     servers,
                     defaults,
                     log_dir,
+                    hide_mentions,
                 } = config;
 
                 let servers = if !server_args.is_empty() {

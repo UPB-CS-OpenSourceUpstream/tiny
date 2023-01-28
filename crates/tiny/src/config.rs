@@ -95,6 +95,9 @@ pub(crate) struct Config<P> {
     pub(crate) servers: Vec<Server<P>>,
     pub(crate) defaults: Defaults,
     pub(crate) log_dir: Option<PathBuf>,
+
+    #[serde(default)]
+    pub(crate) hide_mentions: bool,
 }
 
 fn deser_trimmed_str<'de, D>(d: D) -> Result<String, D::Error>
@@ -304,6 +307,7 @@ impl Config<PassOrCmd> {
             servers,
             defaults,
             log_dir,
+            hide_mentions,
         } = self;
 
         let mut servers_: Vec<Server<String>> = Vec::with_capacity(servers.len());
@@ -371,6 +375,7 @@ impl Config<PassOrCmd> {
             servers: servers_,
             defaults,
             log_dir,
+            hide_mentions,
         })
     }
 }
@@ -488,6 +493,7 @@ mod tests {
                 tls: false,
             },
             log_dir: None,
+            hide_mentions: false,
         };
 
         let errors = config.validate();
